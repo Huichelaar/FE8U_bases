@@ -22,6 +22,7 @@
 #include "text/Install Text Data.event"   // Remove this if you already have a text buildfile.
 #include "defs/ProcDefinitions.event"
 #include "tables/tables.event"
+#include "baseChapters/baseChapters.event"
 #include "src/src.event"
 
 // Debug, remove when done testing.

@@ -1,0 +1,31 @@
+{
+EventPointerTable(37,MyEvents)
+
+MyEvents:
+POIN TurnBasedEvents
+POIN CharacterBasedEvents
+POIN LocationBasedEvents
+POIN MiscBasedEvents
+POIN Dunno Dunno Dunno
+POIN Tutorial
+POIN TrapData TrapDataHard
+POIN PlayerUnits PlayerUnitsHard
+POIN $0 $0 $0 $0 $0 $0
+POIN BeginningScene EndingScene
+
+TurnBasedEvents: CharacterBasedEvents: LocationBasedEvents: MiscBasedEvents: Dunno: Tutorial: TrapData: TrapDataHard: EndingScene:
+END_MAIN
+
+PlayerUnits: PlayerUnitsHard:
+UNIT Eirika EirikaLord Eirika Level(1,Ally,0) [0,0] 0 0 0 0 [Rapier, Vulnerary] NoAI
+UNIT
+
+LocationBasedEvents:
+Seize(0,0)
+END_MAIN
+
+BeginningScene:
+LOAD1 0 PlayerUnits
+ENUN
+ENDA
+}

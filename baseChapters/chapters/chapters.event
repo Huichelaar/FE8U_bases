@@ -1,3 +1,27 @@
+// Repoint chapter data table.
+PUSH
+  ORG 0x3462C
+    POIN chapterData
+  
+  ORG 0xB5E68
+    POIN chapterData
+  
+  ORG 0xB5F98
+    POIN chapterData
+    
+  ORG 0xB61C0
+    POIN chapterData
+    
+  ORG 0xB6328
+    POIN chapterData
+  
+  ORG 0xB6500
+    POIN chapterData
+POP
+
+ALIGN 4; chapterData:
+#incbin "FE8ChapterData.dmp"
+
 #include "0.event"
 #include "1.event"
 #include "2.event"

@@ -21,7 +21,7 @@ PROC_GOTO(0x19)
 
 ALIGN 4; WLC_loadBaseChapter:
 #include "loadBaseChapter.lyn.event"
-ALIGN 4; WLC_isBaseChapter:
+ALIGN 4; PUSH; ORG CurrentOffset+1; WLC_isBaseChapter: POP    // To allow longcalling. Function is called by FreeMU C code.
 #include "isBaseChapter.lyn.event"
 ALIGN 4; WLC_skipIntroIfBase:
 #include "skipIntroIfBase.lyn.event"

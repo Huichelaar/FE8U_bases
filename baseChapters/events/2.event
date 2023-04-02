@@ -27,6 +27,7 @@ END_MAIN
 BeginningScene:
 LOAD1 0 PlayerUnits
 ENUN
+SET_ACTIVE Eirika
 NoFade
 ENDA
 

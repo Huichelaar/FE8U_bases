@@ -1,5 +1,5 @@
 @ Replaces 0x8009DE1, CallActualSaveMenu.
-@ Does a few extra things to ensure GAMECTRL
+@ Does a few extra things to ensure GAMECTRL's
 @ current chapter data doesn't contain baseChapterID.
 .thumb
 

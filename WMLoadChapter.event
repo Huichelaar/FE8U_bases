@@ -21,6 +21,7 @@
 #include "text/AntiHuffman.event"         // Remove if you are already including essential fixes.
 #include "text/Install Text Data.event"   // Remove this if you already have a text buildfile.
 #include "defs/ProcDefinitions.event"
+#include "MokhaFreeMU/FreeMU.event"
 #include "tables/tables.event"
 #include "baseChapters/baseChapters.event"
 #include "src/src.event"

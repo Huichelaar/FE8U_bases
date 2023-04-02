@@ -12,6 +12,7 @@
 **/*.ss7
 **/*.ss8
 **/*.ss9
+**/*.o
 
 # Directories
 **/*.TextEntries

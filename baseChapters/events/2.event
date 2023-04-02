@@ -31,7 +31,10 @@ NoFade
 ENDA
 
 EndingScene:
-NoFade
+ENUF 0x3        // Unsetting victory flag will avoid turncount and timer from being overwritten.
+CHECK_CHAPTERID
+SADD 2 12 0
 MNCH (-1)
+NoFade
 ENDA
 }

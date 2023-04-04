@@ -15,6 +15,7 @@ struct FMUProc {
 	/* 2E */	s8 yCur;
 	/* 2F */	s8 yTo;
 	/* 30 */	Unit* FMUnit;
+  /* 34 */  u8 smsFacing;
 };
 
 struct FMUTrapDef{
@@ -89,15 +90,27 @@ bool FMUmisc_RunTalkEvents(struct FMUProc*);
 bool FMU_RunTrapASMC(FMUProc*);
 bool FMU_RunTrapASMC_Auto(FMUProc*);
 
+
 /*------------- KeyPress --------------*/
 bool FMU_OnButton_StartMenu(FMUProc*);
 bool FMU_OnButton_EndFreeMove(FMUProc*);
 bool FMU_OnButton_ChangeUnit(FMUProc*);
 
+
+/*------------- Graphics --------------*/
+extern void* FMU_idleSMSGfxTable[0xFF];
+
+
 /*------------- WLCThings -------------*/
 extern u8 WLC_isBaseChapter(u8 chapterIndex);
 
+
 /*------------- Other -----------------*/
-const u8 CheckEventId(u16 eventId); //! FE8U = 0x8083DA8
+extern u8 gSMSGfxBuffer_Frame1[0x2000];                                   //! FE8U = 0x2034010
+extern u8 gSMSGfxBuffer_Frame2[0x2000];                                   //! FE8U = 0x2036010
+extern u8 gSMSGfxBuffer_Frame3[0x2000];                                   //! FE8U = 0x2038010
+const u8 CheckEventId(u16 eventId);                                       //! FE8U = 0x8083DA8
+const void CopyTileGfxForObj(void* src, void* dest, u8 width, u8 height); //! FE8U = 0x8013020
+const void MuCtr_OnEnd(Proc* proc);                                       //! FE8U = 0x807A1FD
 
 #endif //FREE_MOVEMENT_MOKHA

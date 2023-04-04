@@ -9,6 +9,10 @@ PUSH
   // Repair GAMECTRL chapter variables.
   ORG 0x591928
     POIN WLC_callSaveMenu|1
+    
+  // Skip phase switch if chapter is base chapter.
+  ORG 0x59A290
+    PROC_CALL_ROUTINE_2(WLC_skipPhaseSwitchIfBase|1)    // PROC_CALL_ROUTINE_2 can yield.
 
 POP
 
@@ -25,5 +29,7 @@ ALIGN 4; PUSH; ORG CurrentOffset+1; WLC_isBaseChapter: POP    // To allow longca
 #include "isBaseChapter.lyn.event"
 ALIGN 4; WLC_skipIntroIfBase:
 #include "skipIntroIfBase.lyn.event"
+ALIGN 4; WLC_skipPhaseSwitchIfBase:
+#include "skipPhaseSwitchIfBase.lyn.event"
 ALIGN 4; WLC_callSaveMenu:
 #include "callSaveMenu.lyn.event"

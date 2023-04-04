@@ -21,6 +21,14 @@ __TEXTPROCESSD4E:
 #incbin ".TextEntries\TextBuildfileWLC_menuHelpText.fetxt.dmp"
 setText($D4E, __TEXTPROCESSD4E)
 
+__TEXTPROCESSD4F:
+#incbin ".TextEntries\TextBuildfileFMU_exitMenuCommandText.fetxt.dmp"
+setText($D4F, __TEXTPROCESSD4F)
+
+__TEXTPROCESSD50:
+#incbin ".TextEntries\TextBuildfileFMU_exitMenuHelpText.fetxt.dmp"
+setText($D50, __TEXTPROCESSD50)
+
 }
 
 #endif // TEXT_INSTALLER_TEXTBUILDFILE_EVENT

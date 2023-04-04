@@ -44,6 +44,60 @@ void pFMU_HanleContinueMove(struct FMUProc* proc){
 	return;
 }
 
+void pFMU_UpdateSMS(struct FMUProc* proc){
+  u32 tileIndex = (proc->FMUnit->pMapSpriteHandle->oam2Base & 0x3FF) - 0x80;
+  u8 smsID = proc->FMUnit->pClassData->SMSId;
+  u16 size = gStandingMapSpriteData[smsID].size;
+  u8 width =  size < 2 ? 16 : 32;
+  u8 height = size > 0 ? 32 : 16;
+  u32 srcOffs[3] = {0, 0, 0};
+  int frame = GetGameClock() % 72;
+  
+  // Do nothing if no different-direction facing idle sprites exist.
+  if (FMU_idleSMSGfxTable[smsID] == NULL)
+    return;
+  
+  // Decompress sms gfx.
+  if (proc->smsFacing==2)
+    Decompress(gStandingMapSpriteData[smsID].pGraphics, gGenericBuffer);    // Downward facing sms.
+  else {
+    Decompress(FMU_idleSMSGfxTable[smsID], gGenericBuffer);                 // Other direction-facing sms.
+    srcOffs[0] = proc->smsFacing==3 ? proc->smsFacing-1 : proc->smsFacing;  // Up-facing sprite comes immediately after right.
+  }
+  
+  // Move sms gfx into smsbuffer.
+  srcOffs[0] = (srcOffs[0] << (7 + size)) * 3;
+  srcOffs[1] = srcOffs[0] + (0x80 << (size << 2));
+  srcOffs[2] = srcOffs[1] + (0x80 << (size << 2));
+  CopyTileGfxForObj((void*)gGenericBuffer+srcOffs[0], (void*)gSMSGfxBuffer_Frame1+(tileIndex<<5), width>>3, height>>3);
+  CopyTileGfxForObj((void*)gGenericBuffer+srcOffs[1], (void*)gSMSGfxBuffer_Frame2+(tileIndex<<5), width>>3, height>>3);
+  CopyTileGfxForObj((void*)gGenericBuffer+srcOffs[2], (void*)gSMSGfxBuffer_Frame3+(tileIndex<<5), width>>3, height>>3);
+  
+  // Overwrite VRAM with new SMS next frame. Timings taken from 0x8026F2C, SyncUnitSpriteSheet.
+  if (frame < 31)
+    RegisterTileGraphics(gSMSGfxBuffer_Frame1, (void*)0x06011000, sizeof(gSMSGfxBuffer_Frame1));
+  else if (frame < 35)
+    RegisterTileGraphics(gSMSGfxBuffer_Frame2, (void*)0x06011000, sizeof(gSMSGfxBuffer_Frame2));
+  else if (frame < 67)
+    RegisterTileGraphics(gSMSGfxBuffer_Frame3, (void*)0x06011000, sizeof(gSMSGfxBuffer_Frame3));
+  else
+    RegisterTileGraphics(gSMSGfxBuffer_Frame2, (void*)0x06011000, sizeof(gSMSGfxBuffer_Frame2));
+  return;
+}
+
+// This replaces MuCtr_OnEnd.
+// Adapts different-facing SMS during free movement.
+void pFMUCtr_OnEnd(Proc* proc){
+  struct FMUProc* FMUproc = (FMUProc*)ProcFind(FreeMovementControlProc);
+  
+  MuCtr_OnEnd(proc);
+  
+  // Determine facing direction and update sms.
+  if (FMUproc!=NULL && GetFreeMovementState())
+    pFMU_UpdateSMS(FMUproc);
+
+  return;
+}
 
 void pFMU_MoveUnit(struct FMUProc* proc){	//Label 1
 	u16 iKeyCur = gKeyState.heldKeys;
@@ -56,21 +110,33 @@ void pFMU_MoveUnit(struct FMUProc* proc){	//Label 1
 	//proc->xTo  = y;
 	
 	if(0xF0&iKeyCur){
-		if(iKeyCur&0x10) 		x++;
-		else if(iKeyCur&0x20)	x--;
-		else if(iKeyCur&0x40)	y--;
-		else if(iKeyCur&0x80)	y++;
+		if(iKeyCur&0x10) {
+      x++;
+      proc->smsFacing = 1;
+    }
+		else if(iKeyCur&0x20) {
+      x--;
+      proc->smsFacing = 0;
+    }
+		else if(iKeyCur&0x40) {
+      y--;
+      proc->smsFacing = 3;
+    }
+		else if(iKeyCur&0x80) {
+      y++;
+      proc->smsFacing = 2;
+    }
 	}
 	
 		
 	if( !IsPosInvaild(x,y) ){
 		proc->xTo = x;
-		proc->xTo = y;
+		proc->yTo = y;
 	}
 		
 	if( FMU_CanUnitBeOnPos(gActiveUnit, x, y) ){
 		if( !IsPosInvaild(x,y) )
-			MuCtr_StartMoveTowards(gActiveUnit, x, y, 0x10);
+			MuCtr_StartMoveTowards(gActiveUnit, x, y, 0x10, 0x0);
 	}
 	else
 		ProcGoto((Proc*)proc,0x2);

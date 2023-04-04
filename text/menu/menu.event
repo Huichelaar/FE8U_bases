@@ -1,6 +1,12 @@
 ## WLC_menuCommandText
- Load Chapter[X]
+ Enter Base[X]
 
 ## WLC_menuHelpText
 Load map/chapter associated[NL]
 with this node.[X]
+
+## FMU_exitMenuCommandText
+ Leave[X]
+
+## FMU_exitMenuHelpText
+Return to world map.[X]

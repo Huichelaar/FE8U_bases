@@ -22,13 +22,23 @@ FMU_OnButton_StartMenu:
 	@ Function supports interworking.
 	@ args = 0, pretend = 0, frame = 0
 	@ frame_needed = 0, uses_anonymous_args = 0
-	movs	r3, #0
+	movs	r2, #31
+	movs	r1, #0
+	ldr	r0, .L2
+	ldrb	r3, [r0, #1]
+	ands	r3, r2
 	push	{r4, lr}
-	movs	r2, r3
+	strb	r3, [r0, #1]
 	@ sp needed
-	movs	r1, r3
-	ldr	r4, .L2
-	ldr	r0, .L2+4
+	adds	r0, r0, #60
+	ldrb	r3, [r0]
+	adds	r2, r2, #32
+	ands	r3, r2
+	strb	r3, [r0]
+	movs	r2, r1
+	movs	r3, r1
+	ldr	r4, .L2+4
+	ldr	r0, .L2+8
 	bl	.L4
 	movs	r0, #1
 	pop	{r4}
@@ -37,6 +47,7 @@ FMU_OnButton_StartMenu:
 .L3:
 	.align	2
 .L2:
+	.word	gLCDIOBuffer
 	.word	StartMenuAdjusted
 	.word	FreeMovementLMenu
 	.size	FMU_OnButton_StartMenu, .-FMU_OnButton_StartMenu

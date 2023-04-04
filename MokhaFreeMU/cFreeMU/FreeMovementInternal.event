@@ -8,6 +8,7 @@
 	#include "src/FreeMU_Event.lyn.event"
 	#include "src/FreeMU_ButtonPress.lyn.event"
 	#include "asm/FreeMU.lyn.event"
+  #include "gfx/gfx.event"
 	#include "MU6Cfix/_MU6Cfix.event"
 
 
@@ -21,6 +22,10 @@ PUSH
 	ORG $59A2E4
 	POIN NewMakePhaseControllerFunc|1
 			//call FreeMovementControlProc
+	
+	ORG $9A2DBC
+	POIN pFMUCtr_OnEnd|1
+			//set destructor pFMUCtr_OnEnd
 POP
 
 
@@ -114,6 +119,7 @@ ALIGN 4
 	#define MM_Suspend 	  "BYTE $AC $7E $0D $08 $9F $06 $E4 $06 $00 $73 $00 $00 $B1 $25 $02 $08 $00 $00 $00 $00 $D1 $25 $02 $08 $00 $00 $00 $00 $00 $00 $00 $00 $00 $00 $00 $00"
 	#define MM_Dunno1     "BYTE $BC $7E $0D $08 $9B $06 $E1 $06 $00 $71 $00 $00 $49 $F4 $04 $08 $00 $00 $00 $00 $29 $26 $02 $08 $00 $00 $00 $00 $00 $00 $00 $00 $00 $00 $00 $00"
 	#define MM_Dunno2     "BYTE $B4 $7E $0D $08 $9D $06 $E2 $06 $00 $72 $00 $00 $49 $F4 $04 $08 /*$CD $4C $02 $08 */$00 $00 $00 $00 $E1 $4C $02 $08 $00 $00 $00 $00 $00 $00 $00 $00 $00 $00 $00 $00"
+  #define MM_Exit	  "WORD 0x0; SHORT FMU_exitMenuCommandText FMU_exitMenuHelpText; BYTE 0x0 0x0; SHORT 0x0; WORD 0x804F449 0x0 0x8083281 0x0 0x0 0x0"
 	#define MM_Separator  "WORD 0 0 0 0 0 0 0 0 0"
 	#define MenuBox(XCoord, YCoord, Width, Height, Style, CommandListPointer) "BYTE XCoord YCoord Width Height; WORD Style; POIN CommandListPointer"
 	#define MenuBoxFull(XCoord, YCoord, Width, Height, Style, CommandListPointer, Constructor, RPressStart, Pointer3, OnBPress, OnRPress, RPressEnd) "BYTE XCoord YCoord Width Height; WORD Style; POIN CommandListPointer Constructor RPressStart Pointer3 OnBPress OnRPress RPressEnd"
@@ -131,9 +137,8 @@ ALIGN 4
 	FreeMovementMenuTable:
 	MM_Status
 	MM_Guide
-	MM_Dunno1
-	MM_Dunno2
+	//MM_Dunno1
+	//MM_Dunno2
 	MM_Suspend
+  MM_Exit
 	MM_Separator
-
-

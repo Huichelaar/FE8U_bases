@@ -326,8 +326,12 @@ pFMU_InitFMUnit:
 	@ args = 0, pretend = 0, frame = 0
 	@ frame_needed = 0, uses_anonymous_args = 0
 	@ link register save eliminated.
-	ldr	r3, .L42
+	movs	r3, r0
 	@ sp needed
+	movs	r2, #0
+	adds	r3, r3, #52
+	strb	r2, [r3]
+	ldr	r3, .L42
 	ldr	r3, [r3]
 	str	r3, [r0, #48]
 	bx	lr

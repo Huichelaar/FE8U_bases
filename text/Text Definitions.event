@@ -9,5 +9,7 @@
 #define WLC_menuHelpText $D4E
 #define FMU_exitMenuCommandText $D4F
 #define FMU_exitMenuHelpText $D50
+#define baseConvoGarciaCh2 $D51
+#define baseConvoLarachelCh2 $D52
 
 #endif // TEXT_DEFINITIONS_TEXTBUILDFILE_EVENT

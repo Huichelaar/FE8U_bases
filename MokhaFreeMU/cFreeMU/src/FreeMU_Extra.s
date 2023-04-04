@@ -328,7 +328,7 @@ pFMU_InitFMUnit:
 	@ link register save eliminated.
 	movs	r3, r0
 	@ sp needed
-	movs	r2, #0
+	movs	r2, #2
 	adds	r3, r3, #52
 	strb	r2, [r3]
 	ldr	r3, .L42

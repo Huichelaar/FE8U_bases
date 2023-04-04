@@ -54,10 +54,12 @@ bool FMUmisc_RunMapEvents(struct FMUProc* proc){
 		LocEventType++;
 	}
 	
-	if(RunMapDoorEventTemplate(x-1,y)) return 1;
-	else if(RunMapDoorEventTemplate(x+1,y)) return 1;
-	else if(RunMapDoorEventTemplate(x,y-1)) return 1;
-	else if(RunMapDoorEventTemplate(x,y+1)) return 1;
+  if (proc->smsFacing==0)      x--;
+  else if (proc->smsFacing==1) x++;
+  else if (proc->smsFacing==2) y++;
+  else                         y--;
+  
+	if(RunMapDoorEventTemplate(x,y)) return 1;
 	return 0;
 }
 
@@ -130,11 +132,12 @@ bool FMUmisc_RunTalkEvents(struct FMUProc* proc){
 	u8 y = gActiveUnit->yPos;
 	u8 SubjectCharID = proc->FMUnit->pCharacterData->number;
 	
-	if(RunTalkEventTemplate(SubjectCharID,x-1,y)) return 1;
-	else if(RunTalkEventTemplate(SubjectCharID,x+1,y)) return 1;
-	else if(RunTalkEventTemplate(SubjectCharID,x,y-1)) return 1;
-	else if(RunTalkEventTemplate(SubjectCharID,x,y+1)) return 1;
-	
+  if (proc->smsFacing==0)      x--;
+  else if (proc->smsFacing==1) x++;
+  else if (proc->smsFacing==2) y++;
+  else                         y--;
+  
+  if(RunTalkEventTemplate(SubjectCharID,x,y)) return 1;
 	return 0;
 }
 static bool RunTalkEventTemplate(u8 SubjectCharID, s8 x, s8 y){

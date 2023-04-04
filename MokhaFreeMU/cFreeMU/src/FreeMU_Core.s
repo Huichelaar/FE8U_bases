@@ -276,36 +276,38 @@ pFMU_MoveUnit:
 	@ args = 0, pretend = 0, frame = 16
 	@ frame_needed = 0, uses_anonymous_args = 0
 	push	{r4, r5, r6, r7, lr}
-	movs	r2, #240
+	movs	r6, r0
+	movs	r1, r6
 	movs	r5, #16
 	movs	r4, #17
-	ldr	r3, .L62
-	ldr	r7, .L62+4
-	movs	r6, r0
-	ldrh	r3, [r3, #4]
+	ldr	r7, .L62
+	adds	r1, r1, #52
 	ldr	r0, [r7]
+	ldrb	r2, [r1]
+	ldr	r3, .L62+4
 	sub	sp, sp, #28
+	ldrh	r3, [r3, #4]
 	ldrsb	r5, [r0, r5]
 	ldrsb	r4, [r0, r4]
+	str	r2, [sp, #16]
+	movs	r2, #240
 	tst	r3, r2
 	beq	.L34
-	movs	r1, #16
-	movs	r2, r3
-	ands	r2, r1
-	tst	r3, r1
+	subs	r2, r2, #224
+	mov	ip, r2
+	ands	r2, r3
+	str	r2, [sp, #12]
+	mov	r2, ip
+	tst	r3, r2
 	beq	.L35
-	movs	r2, #1
+	movs	r3, #1
 	adds	r5, r5, #1
 	lsls	r5, r5, #24
 	asrs	r5, r5, #24
 .L61:
-	movs	r3, r6
-	adds	r3, r3, #52
-	strb	r2, [r3]
+	strb	r3, [r1]
 .L34:
 	lsls	r3, r5, #24
-	str	r3, [sp, #16]
-	lsls	r3, r4, #24
 	str	r3, [sp, #20]
 	movs	r3, r4
 	ands	r3, r5
@@ -359,29 +361,34 @@ pFMU_MoveUnit:
 	movs	r3, #0
 .L46:
 	lsls	r3, r3, #24
-	bne	.L33
+	bne	.L43
 .L48:
 	ldr	r3, [sp, #20]
-	lsrs	r2, r3, #24
-	ldr	r3, [sp, #16]
 	lsrs	r1, r3, #24
 	movs	r3, #0
+	lsls	r2, r4, #24
 	str	r3, [sp]
 	ldr	r0, [r7]
 	ldr	r4, .L62+16
+	lsrs	r2, r2, #24
 	adds	r3, r3, #16
 	bl	.L64
-.L33:
+.L43:
+	movs	r1, #2
+	movs	r0, r6
+	ldr	r3, .L62+20
+	bl	.L5
 	add	sp, sp, #28
 	@ sp needed
 	pop	{r4, r5, r6, r7}
 	pop	{r0}
 	bx	r0
 .L35:
-	lsls	r1, r3, #26
+	lsls	r2, r3, #26
 	bpl	.L36
 	subs	r5, r5, #1
 	lsls	r5, r5, #24
+	ldr	r3, [sp, #12]
 	asrs	r5, r5, #24
 	b	.L61
 .L36:
@@ -389,7 +396,7 @@ pFMU_MoveUnit:
 	bpl	.L37
 	subs	r4, r4, #1
 	lsls	r4, r4, #24
-	movs	r2, #3
+	movs	r3, #3
 	asrs	r4, r4, #24
 	b	.L61
 .L37:
@@ -397,20 +404,24 @@ pFMU_MoveUnit:
 	bpl	.L34
 	adds	r4, r4, #1
 	lsls	r4, r4, #24
-	movs	r2, #2
+	movs	r3, #2
 	asrs	r4, r4, #24
 	b	.L61
 .L42:
-	movs	r1, #2
+	movs	r3, r6
+	adds	r3, r3, #52
+	ldrb	r3, [r3]
+	ldr	r2, [sp, #16]
+	cmp	r3, r2
+	beq	.L43
 	movs	r0, r6
-	ldr	r3, .L62+20
-	bl	.L5
-	b	.L33
+	bl	pFMU_UpdateSMS
+	b	.L43
 .L63:
 	.align	2
 .L62:
-	.word	gKeyState
 	.word	gActiveUnit
+	.word	gKeyState
 	.word	gMapSize
 	.word	FMU_CanUnitBeOnPos
 	.word	MuCtr_StartMoveTowards

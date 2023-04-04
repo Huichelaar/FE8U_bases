@@ -78,7 +78,7 @@ void NewMakePhaseControllerFunc(struct Proc* ParentProc){
  */
  
 void pFMU_InitFMUnit(struct FMUProc* proc){
-  proc->smsFacing = 0;
+  proc->smsFacing = 2;          // Initialize to facing downward.
   proc->FMUnit = gActiveUnit;   // This assumes gActiveUnit contains either 0 or a unit pointer.
   return;
 }

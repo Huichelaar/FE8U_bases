@@ -103,6 +103,7 @@ void pFMU_MoveUnit(struct FMUProc* proc){	//Label 1
 	u16 iKeyCur = gKeyState.heldKeys;
 	s8 x = gActiveUnit->xPos;
 	s8 y = gActiveUnit->yPos;
+  u8 facingCur = proc->smsFacing;
 	
 	//proc->xCur = x;
 	//proc->xCur = y;
@@ -139,6 +140,8 @@ void pFMU_MoveUnit(struct FMUProc* proc){	//Label 1
 			MuCtr_StartMoveTowards(gActiveUnit, x, y, 0x10, 0x0);
 	}
 	else
+    if (facingCur != proc->smsFacing)
+      pFMU_UpdateSMS(proc);
 		ProcGoto((Proc*)proc,0x2);
 	return;
 }

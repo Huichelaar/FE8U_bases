@@ -29,6 +29,14 @@ __TEXTPROCESSD50:
 #incbin ".TextEntries\TextBuildfileFMU_exitMenuHelpText.fetxt.dmp"
 setText($D50, __TEXTPROCESSD50)
 
+__TEXTPROCESSD51:
+#incbin ".TextEntries\TextBuildfilebaseConvoGarciaCh2.fetxt.dmp"
+setText($D51, __TEXTPROCESSD51)
+
+__TEXTPROCESSD52:
+#incbin ".TextEntries\TextBuildfilebaseConvoLarachelCh2.fetxt.dmp"
+setText($D52, __TEXTPROCESSD52)
+
 }
 
 #endif // TEXT_INSTALLER_TEXTBUILDFILE_EVENT

@@ -22,15 +22,6 @@
 #include "text/Install Text Data.event"   // Remove this if you already have a text buildfile.
 #include "defs/ProcDefinitions.event"
 #include "MokhaFreeMU/FreeMU.event"
+#include "src/src.event"
 #include "tables/tables.event"
 #include "baseChapters/baseChapters.event"
-#include "src/src.event"
-
-// Debug, remove when done testing.
-PUSH
-
-  // Change Hamill Canyon to Valni-type node for testing purposes.
-  //ORG 0x206230
-    //BYTE 0x3
-
-POP

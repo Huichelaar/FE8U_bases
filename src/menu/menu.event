@@ -6,6 +6,8 @@ POP
 
 ALIGN 4; WLC_menuEffect:
 #include "menuEffect.lyn.event"
+ALIGN 4; WLC_menuUsability:
+#include "menuUsability.lyn.event"
 
 WLC_menu:
 // Enter Armory
@@ -71,7 +73,7 @@ SHORT WLC_menuHelpText
 BYTE  0x0
 BYTE  0x4
 SHORT 0x0
-WORD  0x804F449
+POIN  WLC_menuUsability+0x1
 WORD  0x0
 POIN  WLC_menuEffect+0x1
 WORD  0x0

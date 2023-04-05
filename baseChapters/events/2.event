@@ -52,6 +52,7 @@ END_MAIN
   ENDA
 
 BeginningScene:
+WLC_baseChapterUnavailable(2)
 LOAD1 0 PlayerUnits
 ENUN
 LOAD1 0 NPCUnits

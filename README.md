@@ -1,5 +1,5 @@
 # FE8U_bases
-A patch for FE8U. Allows the player to enter a previously completed chapter from the world map with a different set of events. These chapters have [free](https://feuniverse.us/t/smes-asm-and-miscellany/4445/108) [movement]((https://feuniverse.us/t/fe8-freemovement-rework/13332)) enabled.
+A patch for FE8U. Allows the player to enter a previously completed chapter from the world map with a different set of events. These chapters have [free](https://feuniverse.us/t/smes-asm-and-miscellany/4445/108) [movement](https://feuniverse.us/t/fe8-freemovement-rework/13332) enabled.
 
 ![Gif broken](https://i.imgur.com/z8ZfXr0.gif)
 

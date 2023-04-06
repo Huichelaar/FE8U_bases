@@ -76,10 +76,11 @@ void NewMakePhaseControllerFunc(struct Proc* ParentProc){
 /*
  * Inside Proc
  */
- 
+
+// Sets initial controlled unit, also called on resume.
 void pFMU_InitFMUnit(struct FMUProc* proc){
-  proc->smsFacing = 2;          // Initialize to facing downward.
-  proc->FMUnit = gActiveUnit;   // This assumes gActiveUnit contains either 0 or a unit pointer.
+  proc->FMUnit = GetUnitByCharId((u8)gGMData.units[0].unk);   // First unit in worldmap units.
+  proc->smsFacing = 2;                                        // Initialize to facing downward.
   return;
 }
 

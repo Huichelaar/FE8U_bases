@@ -41,7 +41,7 @@ extern "C" {
 #include "StanH/save.h"
 #include "StanH/event.h"
 #include "StanH/battle.h"
-
+#include "StanH/wm.h"
 
 
 #include "Mokha/mAnime.h"

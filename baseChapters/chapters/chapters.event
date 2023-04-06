@@ -20,7 +20,7 @@ PUSH
 POP
 
 ALIGN 4; chapterData:
-#incbin "FE8ChapterData.dmp"
+#include "FE8ChapterData.event"
 
 #include "0.event"
 #include "1.event"

@@ -1,3 +1,11 @@
+baseChapterEndingScene:
+ENUF 0x3        // Unsetting victory flag will avoid turncount and timer being overwritten.
+CHECK_CHAPTERID
+SADD 2 12 0
+MNCH (-1)
+NoFade
+ENDA
+
 #include "0.event"
 #include "1.event"
 #include "2.event"

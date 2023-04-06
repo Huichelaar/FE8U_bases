@@ -64,15 +64,10 @@ LOAD1 0 PlayerUnits
 ENUN
 LOAD1 0 NPCUnits
 ENUN
-SET_ACTIVE Eirika
 NoFade
 ENDA
 
 EndingScene:
-ENUF 0x3        // Unsetting victory flag will avoid turncount and timer from being overwritten.
-CHECK_CHAPTERID
-SADD 2 12 0
-MNCH (-1)
-NoFade
+CALL baseChapterEndingScene
 ENDA
 }

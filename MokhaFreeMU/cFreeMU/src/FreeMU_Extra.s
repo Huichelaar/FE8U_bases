@@ -325,20 +325,25 @@ pFMU_InitFMUnit:
 	@ Function supports interworking.
 	@ args = 0, pretend = 0, frame = 0
 	@ frame_needed = 0, uses_anonymous_args = 0
-	@ link register save eliminated.
-	movs	r3, r0
-	@ sp needed
-	movs	r2, #2
-	adds	r3, r3, #52
-	strb	r2, [r3]
+	push	{r4, lr}
 	ldr	r3, .L42
-	ldr	r3, [r3]
-	str	r3, [r0, #48]
-	bx	lr
+	@ sp needed
+	movs	r4, r0
+	ldrb	r0, [r3, #18]
+	ldr	r3, .L42+4
+	bl	.L11
+	movs	r3, #2
+	str	r0, [r4, #48]
+	adds	r4, r4, #52
+	strb	r3, [r4]
+	pop	{r4}
+	pop	{r0}
+	bx	r0
 .L43:
 	.align	2
 .L42:
-	.word	gActiveUnit
+	.word	gGMData
+	.word	GetUnitByCharId
 	.size	pFMU_InitFMUnit, .-pFMU_InitFMUnit
 	.align	1
 	.global	pFMU_OnInit

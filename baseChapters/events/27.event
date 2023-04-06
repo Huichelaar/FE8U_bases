@@ -13,19 +13,20 @@ POIN PlayerUnits PlayerUnitsHard
 POIN $0 $0 $0 $0 $0 $0
 POIN BeginningScene EndingScene
 
-TurnBasedEvents: CharacterBasedEvents: MiscBasedEvents: Dunno: Tutorial: TrapData: TrapDataHard: EndingScene:
+TurnBasedEvents: CharacterBasedEvents: LocationBasedEvents: MiscBasedEvents: Dunno: Tutorial: TrapData: TrapDataHard:
 END_MAIN
 
 PlayerUnits: PlayerUnitsHard:
-UNIT Eirika EirikaLord Eirika Level(1,Ally,0) [0,0] 0 0 0 0 [Rapier, Vulnerary] NoAI
+UNIT Eirika EirikaLord Eirika Level(1,Ally,0) [0,0] 0 0 0 0 [Rapier, Elixir] NoAI
 UNIT
-
-LocationBasedEvents:
-Seize(0,0)
-END_MAIN
 
 BeginningScene:
 LOAD1 0 PlayerUnits
 ENUN
+NoFade
+ENDA
+
+EndingScene:
+CALL baseChapterEndingScene
 ENDA
 }

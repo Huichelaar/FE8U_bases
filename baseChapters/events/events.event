@@ -1,7 +1,7 @@
 baseChapterEndingScene:
-ENUF 0x3        // Unsetting victory flag will avoid turncount and timer being overwritten.
-CHECK_CHAPTERID
-SADD 2 12 0
+ENUF 0x3                // Unsetting victory flag will avoid turncount and timer being overwritten.
+CHECK_CHAPTER_NUMBER    // CHECK_CHAPTERID
+SADD 0xC2               // SADD 2 12 0
 MNCH (-1)
 NoFade
 ENDA

@@ -18,7 +18,7 @@ Other additions were made as well:
   - WLC_baseChapterInvertAvailability(nodeID): for a given world map nodeID, makes its base unavailable if it were available before, available if it were unavailable before.
   
 ## Building
-Apply [WMLoadChapter.event](WMLoadChapter.event) to a clean FE8U ROM using [Everything Assembler, AKA EA](https://feuniverse.us/t/event-assembler/1749). Borgo Ridge has a few interactable map events (map objects and other people to talk to). You can enable the base using one of the [ASMC macros](src/ASMC/ASMC.event) and get a feel for things.
+Run [AssembleText.bat](text/AssembleText.bat) to generate text entries. Then, apply [WMLoadChapter.event](WMLoadChapter.event) to a clean FE8U ROM using [Everything Assembler, AKA EA](https://feuniverse.us/t/event-assembler/1749). Borgo Ridge has a few interactable map events (map objects and other people to talk to). You can enable the base using one of the [ASMC macros](src/ASMC/ASMC.event) and get a feel for things.
 
 ## Adapting to an existing project
 If you're making a bigger ROMHack or project involving multiple patches and you're using [FEBuilderGBA](https://github.com/FEBuilderGBA/FEBuilderGBA/releases/) as your main tool, you might be familiar with [Custom Build](https://dw.ngmansion.xyz/doku.php?id=en:en:guide:febuildergba:skillsystems_custombuild). Whilst it's generally not recommended to mix buildfile patches and FEBuilderGBA, if the patch you're interested in using is not available in FEBuilderGBA, Custom Build is one way to still adapt the patch.
